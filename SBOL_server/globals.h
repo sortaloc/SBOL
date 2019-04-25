@@ -1,0 +1,143 @@
+#pragma once
+#ifndef GLOBALS_H
+#define GLOBALS_H
+// TODO: FIX COMPRESSION
+#define DISABLE_COMPRESSION
+#ifndef PACKET_OUTPUT
+#define PACKET_OUTPUT
+#endif
+
+// TODO: Remove LOGIN_SUCCESS
+#define LOGIN_SUCCESS			0
+
+#ifndef FD_CUSTOM_SETSIZE
+#define FD_SETSIZE				300
+#define FD_CUSTOM_SETSIZE
+#endif
+
+#define VERSION_STRING			L"0.1"
+#define MAX_MESG_LEN			4096
+#define CLIENT_BUFFER_SIZE		64000
+#define TCP_BUFFER_SIZE			8192
+
+// Limits
+#define GARAGE_LIMIT			4
+#define ITEMBOX_LIMIT			100
+
+#endif
+
+#define SWAP_SHORT(l)						   \
+            ( ( ((l) >>  8) & 0x00FF ) |       \
+              ( ((l) <<  8) & 0xFF00 ) )
+
+#define SWAP_LONG(l)                                \
+            ( ( ((l) >> 24) & 0x000000FFL ) |       \
+              ( ((l) >>  8) & 0x0000FF00L ) |       \
+              ( ((l) <<  8) & 0x00FF0000L ) |       \
+              ( ((l) << 24) & 0xFF000000L ) )
+
+#define SWAP_LONGLONG(l)                                     \
+            ( ( ((l) >> 56) & 0x00000000000000FFLL ) |       \
+              ( ((l) >> 40) & 0x000000000000FF00LL ) |       \
+              ( ((l) >> 24) & 0x0000000000FF0000LL ) |       \
+              ( ((l) >>  8) & 0x00000000FF000000LL ) |       \
+              ( ((l) <<  8) & 0x000000FF00000000LL ) |       \
+              ( ((l) << 24) & 0x0000FF0000000000LL ) |       \
+              ( ((l) << 40) & 0x00FF000000000000LL ) |       \
+              ( ((l) << 56) & 0xFF00000000000000LL ) )
+
+enum LOGTYPE {
+	LOGTYPE_NONE,
+	LOGTYPE_PACKET,
+	LOGTYPE_ERROR,
+	LOGTYPE_DEBUG,
+	LOGTYPE_COMM,
+	LOGTYPE_CLIENT,
+	LOGTYPE_MANAGEMENT
+};
+extern const wchar_t* LOGFILES[];
+extern const char* STRINGS[];
+enum PACKETTYPE {
+	PACKETTYPE_AUTH,
+	PACKETTYPE_CLIENTAUTH,
+	PACKETTYPE_CLIENTREQ,
+	PACKETTYPE_TBC,
+	PACKETTYPE_CLIENTOPS,
+	PACKETTYPE_SERVEROPS
+}; 
+enum CARLIST {
+	AE86_L_3_1985,						//0
+	AE86_T_3_1985,						//1
+	AE86_L_2_1985,						//2
+	AE86_T_2_1985,						//3
+	MR2_GT_1997,						//4
+	MR2_G_1997,							//5
+	SUPRA_RZ_1993,						//6
+	SUPRA_RZ_1997 = 8,					//8
+	SUPRA_SZR_1997,						//9
+	ALTEZZA_R200_Z_1997,				//10
+	CHASER_TOURER_V_1996 = 12,			//12
+	CHASER_TOURER_V_1998,				//13
+	MARKII_TOURER_V_1998 = 15,			//15
+	SILVIA_K_1988,						//16
+	SILVIA_Q_1988,						//17
+	SILVIA_K_1991,						//18
+	SILVIA_K_1993 = 21,					//21
+	SILVIA_K_1996 = 23,					//23
+	SILVIA_SPECR_1999 = 25,				//25
+	SILVIA_SPECS_1999,					//26
+	S180SX_TYPEIII_1994 = 28,			//28
+	SKYLINE_GTR_VSPECII_1994,			//29
+	SKYLINE_GTR_1989,					//30
+	SKYLINE_GTST_TYPEM_1991,			//31
+	SKYLINE_GTR_VSPEC_1997 = 33,		//33
+	SKYLINE_25GT_TURBO_1998 = 36,		//36
+	SKYLINE_25GT_TURBO_2000,			//37
+	FAIRLADY_Z_S_TT_1998,				//38
+	FAIRLADY_Z_TBAR_1998,				//39
+	CEDRIC_BROUGHAM_VIP_1997,			//40
+	GLORIA_GRANTURISMO_ULTIMA_1997,		//41
+	LANCER_GSR_EVOIII_1995 = 51,		//51
+	LANCER_GSR_EVOIV_1996,				//52
+	SAVANNA_RX7_INFIIII_1989 = 56,		//56
+	RX7_TYPERS_1999 = 58,				//58
+	RX7_TYPERZ_1998,					//59
+	IMPREZA_WRX_STI_VERIV_1997 = 61,	//61
+	IMPREZA_WRX_STI_VERV_1998 = 63,		//63
+	IMPREZA_WRX_STI_VERVI_1999 = 65,	//65
+	FAIRLADY_Z_240ZG_1972 = 75,			//75
+	MX5_ROADSTER_RS_1998 = 80,			//80
+	MX5_ROADSTER_RS_2000,				//81
+	CELICA_GTFOUR_1996 = 83,			//83
+	CELICA_SSIII_1996,					//84
+	GTO_TT_1993 = 87,					//87
+	FTO_GP_VERR_1997,					//88
+	PULSAR_SERIE_VZN1_VER2_1998,		//89
+	LEGACY_TOURING_WAGON_GTB_1998 = 91,	//91
+	CELICA_SSII_SSPACK_1999,			//92
+	MRS_1999,							//93
+	CEDRIC_300VIP_1999,					//94
+	CLORIA_300_ULTIMA_1999,				//95
+	AZ1_1992 = 108,						//108
+	CAPPUCCINO_1991,					//109
+	CEFIRO_CRUISING_1990 = 112,			//112
+	STARION_GSRVR_1988 = 114,			//114
+	SAVANNA_RX3_GT_1973,				//115
+	SKYLINE_2000GTR_1971,				//116
+	SAVANNA_RX7_GTX_1983 = 119,			//119
+	ECLIPSE_GST_1999 = 124,				//124
+	BB15Z_2000 = 127,					//127
+	SUPRA_30GT_T_1989 = 129,			//129
+	SUPRA_25GT_TT_1991,					//130
+	LANCER_GSR_EVOVII_2001,				//131
+	IMPREZA_WRX_NB_2000,				//132
+	IMPREZA_WRX_STI_2000,				//133
+	LANTIS_COUPE_TYPER_1993				//134
+};
+enum STRINGLIST {
+	STR_INVALID_UNPW,
+	STR_PASS_RESET,
+	STR_BANNED,
+	STR_UNKNOWN,
+	STR_LOGGED_IN,
+};
